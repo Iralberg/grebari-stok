@@ -215,6 +215,7 @@ display: flex;
 .main {
   max-width: 1100px;
   margin: 0 auto;
+  margin-top: 20px;
   padding: 28px 32px;
 }
 
