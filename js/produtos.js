@@ -1,7 +1,7 @@
 
 /* ── DATA ── */
 let produtos = JSON.parse(localStorage.getItem("produt")) || []
-let nextId =  1
+let nextId = crypto.randomUUID || 1
 let editId = null;
 let deleteId = null;
 /* --TEMA-- */
