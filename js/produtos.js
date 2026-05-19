@@ -116,6 +116,7 @@ function validate() {
 function submitForm() {
   if (!validate()) return;
   const p = {
+    id:nextId++,
     nome: document.getElementById('f-nome').value.trim(),
     categoria: document.getElementById('f-categoria').value,
     status: document.getElementById('f-status-form').value,
@@ -127,7 +128,7 @@ function submitForm() {
     produtos[i] = { ...produtos[i], ...p };
     showToast('Produto atualizado!', 'success');
   } else {
-    produtos.push({ id:nextId++, ...p });
+    produtos.push({ ...p });
     showToast('Produto cadastrado!', 'success');
   }
   saveProdutos()
