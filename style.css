@@ -178,25 +178,17 @@ body {
 /* TEMA */
 .tema{
   position: absolute;
-
   top: 80px;
   right: 20px;
-
   width: 320px;
   min-height: 260px;
-
   display: flex;
   flex-direction: column;
   gap: 16px;
-
   padding: 20px;
-
   background: var(--surface);
-
   border: 1px solid var(--border);
-
   border-radius: 18px;
-
   box-shadow:
     0 10px 40px rgba(0,0,0,.35),
     inset 0 1px 0 rgba(255,255,255,.03);
