@@ -1,7 +1,7 @@
 
 /* ── DATA ── */
 let produtos = JSON.parse(localStorage.getItem("produt")) || []
-let nextId = Number(localStorage.getItem("idProdut")) || 1
+
 let editId = null;
 let deleteId = null;
 /* --TEMA-- */
@@ -43,9 +43,13 @@ function abrirTema() {
 
 //  --- SAVAR DADOS---
 
+function gerarId() {
+  if (produtos.length === 0) return 1;
+
+  return Math.max(...produtos.map(p => p.id)) + 1;
+}
 
 function saveProdutos() {
-  localStorage.setItem("idProdut", nextId)
   localStorage.setItem("produt", JSON.stringify(produtos))
 }
 
@@ -128,13 +132,15 @@ function submitForm() {
     produtos[i] = { ...produtos[i], ...p };
     showToast('Produto atualizado!', 'success');
   } else {
-    produtos.push({id:nextId++, ...p});
+  
+    produtos.push({id:gerarId(), ...p});
     showToast('Produto cadastrado!', 'success');
   }
   saveProdutos()
   cancelForm();
   renderStats();
   renderTable();
+
 }
 
 /* ── DELETE ── */
