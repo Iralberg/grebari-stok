@@ -1,7 +1,7 @@
 
 /* ── DATA ── */
 let produtos = JSON.parse(localStorage.getItem("produt")) || []
-let nextId = localStorage.getItem("idProdut") || 1
+let nextId = Number(localStorage.getItem("idProdut")) || 1
 let editId = null;
 let deleteId = null;
 /* --TEMA-- */
@@ -116,7 +116,6 @@ function validate() {
 function submitForm() {
   if (!validate()) return;
   const p = {
-    id:nextId++,
     nome: document.getElementById('f-nome').value.trim(),
     categoria: document.getElementById('f-categoria').value,
     status: document.getElementById('f-status-form').value,
@@ -128,7 +127,7 @@ function submitForm() {
     produtos[i] = { ...produtos[i], ...p };
     showToast('Produto atualizado!', 'success');
   } else {
-    produtos.push(p);
+    produtos.push({id:nextId++, ...p});
     showToast('Produto cadastrado!', 'success');
   }
   saveProdutos()
