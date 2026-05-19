@@ -48,7 +48,7 @@ function saveProdutos() {
   localStorage.setItem("idProdut", nextId)
   localStorage.setItem("produt", JSON.stringify(produtos))
 }
-saveProdutos()
+
 function saveTema() {
   localStorage.setItem('tema', selectTema.value)
   
@@ -73,7 +73,7 @@ function openForm(prod = null) {
   document.getElementById('f-status-form').value = prod ? prod.status : 'Ativo';
   document.getElementById('f-preco').value = prod ? prod.preco : '';
   document.getElementById('f-estoque').value = prod ? prod.estoque : '';
-  saveProdutos()
+  
   clearErrors();
   switchTab('form');
 }
@@ -214,7 +214,7 @@ function renderChips() {
     `<button class="btn-clear-all" onclick="clearAllFilters()">Limpar tudo</button>`;
 
   // store closures
-  saveProdutos()
+ 
   el._chips = chips;
 }
 
