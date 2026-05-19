@@ -127,7 +127,7 @@ function submitForm() {
     produtos[i] = { ...produtos[i], ...p };
     showToast('Produto atualizado!', 'success');
   } else {
-    produtos.push({ id:gerarId(), ...p });
+    produtos.push({ id:nextId++, ...p });
     showToast('Produto cadastrado!', 'success');
   }
   saveProdutos()
