@@ -32,6 +32,7 @@ function mudarTema() {
 mudarTema()
 
 function fecharTema() {
+
   temaCaixa.classList.add('hide')
 }
 

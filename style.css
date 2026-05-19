@@ -176,28 +176,42 @@ body {
 }
 
 /* TEMA */
-.tema {
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: center;
-display: flex;
-  position: fixed;
-  left: 20%;
-  height: 300px;
+.tema{
+  position: absolute;
+
+  top: 80px;
+  right: 20px;
+
+  width: 320px;
+  min-height: 260px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
   padding: 20px;
-  width: 60%;
-  margin: auto;
-  background-color: #94939396;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.03);
+
+  z-index: 999;
+  overflow: hidden;
+  animation: fadeIn .2s ease;
 }
 
 
 #temaSelect {
-  width: 100px;
+  width: 50%;
 }
 
-#temaSelect  {
-  color: rgb(0, 0, 0);
-}
+
 .btn-tema{
   padding: 5px;
   font-size: 20px;
@@ -404,7 +418,10 @@ select.error {
   padding: 16px 20px;
   border-bottom: 1px solid var(--border);
 }
-
+#table-wrap{
+  position: relative;
+overflow: scroll;
+}
 .table-count {
   color: var(--dim);
   font-size: 12px;
@@ -702,7 +719,9 @@ td {
   .header {
     padding: 0 16px;
   }
-
+ .tema{
+  flex-flow: column wrap;
+ }
   .main {
     padding: 20px 16px;
   }

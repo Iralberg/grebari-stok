@@ -9,11 +9,12 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap"
     rel="stylesheet">
-  <link rel="manifest" href="./manifest.webmanifest">
-  <meta name="theme-color" content="#090b10">
   <link rel="stylesheet" href="style.css">
+ 
   <script src="./js/app.js" defer></script>
   <script src="./js/produtos.js" defer></script>
+   <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#090b10">
 </head>
 
 <body>
@@ -35,10 +36,10 @@
   </div>
 
   <!--TEMA-->
-  <div class="tema hide" id="container-tema">
+  <div class="tema hide" id="container-tema" >
     <select id="temaSelect" class="btn btn-primary">
       <option value="Claro">Claro</option>
-      <option value="Dark">Dark</option>
+      <option  value="Dark">Dark</option>
     </select>
     <button class="btn-tema save" onclick="renderTema()">Salvar</button>
     <button class="btn-tema cancela" onclick="fecharTema()">Fechar</button>
