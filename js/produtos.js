@@ -42,6 +42,12 @@ function abrirTema() {
 
 
 //  --- SAVAR DADOS---
+function gerarId() {
+  let lastId = Number(localStorage.getItem("lastId")) || 0;
+  lastId++;
+  localStorage.setItem("lastId", lastId);
+  return lastId;
+}
 function saveProdutos() {
   localStorage.setItem("produt", JSON.stringify(produtos))
 }
@@ -124,7 +130,7 @@ function submitForm() {
     produtos[i] = { ...produtos[i], ...p };
     showToast('Produto atualizado!', 'success');
   } else {
-    produtos.push({ id: Date.now(), ...p });
+    produtos.push({ gerarId(), ...p });
     showToast('Produto cadastrado!', 'success');
   }
   saveProdutos()
