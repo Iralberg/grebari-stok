@@ -48,6 +48,7 @@ function saveProdutos() {
   localStorage.setItem("idProdut", nextId)
   localStorage.setItem("produt", JSON.stringify(produtos))
 }
+saveProdutos()
 function saveTema() {
   localStorage.setItem('tema', selectTema.value)
   
