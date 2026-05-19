@@ -1,7 +1,7 @@
 
 /* ── DATA ── */
 let produtos = JSON.parse(localStorage.getItem("produt")) || []
-let nextId = localStorage.getItem("id") || 1
+let nextId = localStorage.getItem("idProdut") || 1
 let editId = null;
 let deleteId = null;
 /* --TEMA-- */
@@ -45,8 +45,8 @@ function abrirTema() {
 
 
 function saveProdutos() {
+  localStorage.setItem("idProdut", nextId)
   localStorage.setItem("produt", JSON.stringify(produtos))
-  localStorage.setItem("id", nextId)
 }
 function saveTema() {
   localStorage.setItem('tema', selectTema.value)
