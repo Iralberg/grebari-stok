@@ -1,7 +1,7 @@
 
 /* ── DATA ── */
 let produtos = JSON.parse(localStorage.getItem("produt")) || []
-let nextId = crypto.randomUUID || 1
+let nextId = localStorage.getItem("id") || 1
 let editId = null;
 let deleteId = null;
 /* --TEMA-- */
@@ -42,9 +42,7 @@ function abrirTema() {
 
 
 //  --- SAVAR DADOS---
-function gerarId() {
-  return crypto.randomUUID();
-}
+
 
 function saveProdutos() {
   localStorage.setItem("produt", JSON.stringify(produtos))
