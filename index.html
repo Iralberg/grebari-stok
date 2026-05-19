@@ -1,166 +1,176 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GREBARI STOCKR — Gestão de Produtos</title>
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<script src="main.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GREBARI STOCKR — Gestão de Produtos</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+    rel="stylesheet">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#090b10">
+  <link rel="stylesheet" href="style.css">
+  <script src="./js/app.js" defer></script>
+  <script src="./js/produtos.js" defer></script>
 </head>
+
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <div class="header-inner">
-    <div class="logo">
-      <div class="logo-bar"></div>
-      <span class="logo-name">GREBARI STOCKR</span>
-      <span class="logo-sep">|</span>
-      <span class="logo-sub">Gestão de Produtos</span>
-    </div>
-    <div class="botoes">
-      <button class="btn btn-primary" onclick="openForm()">+ Novo Produto</button>
-      <button class="btn btn-primary" onclick="abrirTema()"> Tema</button>
-    </div>
-  </div>
-</div>
-
-<!--TEMA-->
-<div class="tema hide" id="container-tema">
-  <select  id="temaSelect" class="btn btn-primary">
-    <option value="Claro">Claro</option>
-    <option value="Dark">Dark</option>
-  </select>
-  <button class="btn-tema save" onclick="renderTema()">Salvar</button>
-  <button class="btn-tema cancela" onclick="fecharTema()">Fechar</button>
-  
-</div>
-
-<!-- MAIN -->
-<div class="main">
-
-  <!-- STATS -->
-  <div class="stats" id="stats"></div>
-
-  <!-- TABS -->
-  <div class="tabs">
-    <button class="tab active" id="tab-lista" onclick="switchTab('lista')">◈ Lista de Produtos</button>
-    <button class="tab" id="tab-form" onclick="switchTab('form')" style="display:none">◉ <span id="tab-form-label">Cadastrar</span></button>
-  </div>
-
-  <!-- LISTA -->
-  <div id="view-lista" class="fade-in">
-    <div class="card filters">
-      <div class="filters-title">Filtros</div>
-      <div class="filters-grid">
-        <input type="text" id="f-busca" placeholder="🔍 Buscar por nome ou categoria..." oninput="renderTable()">
-        <select id="f-cat" onchange="renderTable()">
-          <option value="">Categoria</option>
-          <option>Eletrônicos</option>
-          <option>Cabos</option>
-          <option>Óleo</option>
-          <option>Peças</option>
-          <option>Cama de moto</option>
-          <option>Parafuso</option>
-          <option>Outros</option>
-        </select>
-        <select id="f-status" onchange="renderTable()">
-          <option value="">Status</option>
-          <option>Ativo</option>
-          <option>Inativo</option>
-        </select>
-        <input type="number" id="f-pmin" placeholder="Preço mín." oninput="renderTable()">
-        <input type="number" id="f-pmax" placeholder="Preço máx." oninput="renderTable()">
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-bar"></div>
+        <span class="logo-name">GREBARI STOCKR</span>
+        <span class="logo-sep">|</span>
+        <span class="logo-sub">Gestão de Produtos</span>
       </div>
-      <div class="active-chips" id="active-chips" style="display:none"></div>
-    </div>
-
-    <div class="card">
-      <div class="table-header">
-        <span class="table-count" id="table-count">0 produtos</span>
-      </div>
-      <div id="table-wrap"></div>
-    </div>
-  </div>
-
-  <!-- FORM -->
-  <div id="view-form" style="display:none">
-    <div class="card form-card fade-in">
-      <div class="form-heading">
-        <div class="form-heading-bar"></div>
-        <span class="form-heading-text" id="form-title">NOVO PRODUTO</span>
-      </div>
-      <div class="form-grid">
-        <div>
-          <label class="field-label">Nome do Produto</label>
-          <input type="text" id="f-nome" placeholder="Ex: Notebook Pro X">
-          <span class="field-error" id="err-nome">Nome obrigatório</span>
-        </div>
-        <div class="form-row">
-          <div>
-            <label class="field-label">Categoria</label>
-            <select id="f-categoria">
-              <option value="">Selecionar</option>
-          <option>Eletrônicos</option>
-          <option>Cabos</option>
-          <option>Óleo</option>
-          <option>Peças</option>
-          <option>Cama de moto</option>
-          <option>Parafuso</option>
-          <option>Outros</option>
-            </select>
-            <span class="field-error" id="err-categoria">Categoria obrigatória</span>
-          </div>
-          <div>
-            <label class="field-label">Status</label>
-            <select id="f-status-form">
-              <option>Ativo</option>
-              <option>Inativo</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div>
-            <label class="field-label">Preço (R$)</label>
-            <input type="number" id="f-preco" min="0" step="0.01" placeholder="0,00">
-            <span class="field-error" id="err-preco">Preço inválido</span>
-          </div>
-          <div>
-            <label class="field-label">Estoque (un.)</label>
-            <input type="number" id="f-estoque" min="0" placeholder="0">
-            <span class="field-error" id="err-estoque">Estoque inválido</span>
-          </div>
-        </div>
-        <div class="form-actions">
-          <button class="btn btn-ghost" onclick="cancelForm()">Cancelar</button>
-          <button class="btn btn-primary" onclick="submitForm()">✓ <span id="btn-submit-label">Cadastrar Produto</span></button>
-        </div>
+      <div class="botoes">
+        <button class="btn btn-primary" onclick="openForm()">+ Novo Produto</button>
+        <button class="btn btn-primary" onclick="abrirTema()"> Tema</button>
       </div>
     </div>
   </div>
 
-</div>
+  <!--TEMA-->
+  <div class="tema hide" id="container-tema">
+    <select id="temaSelect" class="btn btn-primary">
+      <option value="Claro">Claro</option>
+      <option value="Dark">Dark</option>
+    </select>
+    <button class="btn-tema save" onclick="renderTema()">Salvar</button>
+    <button class="btn-tema cancela" onclick="fecharTema()">Fechar</button>
 
-<!-- MODAL DELETE -->
-<div class="modal-overlay" id="modal">
-  <div class="modal">
-    <div class="modal-icon">⚠️</div>
-    <div class="modal-title">Remover produto?</div>
-    <div class="modal-desc">Esta ação não pode ser desfeita.</div>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
-      <button class="btn btn-primary" onclick="confirmDelete()">Remover</button>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- STATS -->
+    <div class="stats" id="stats"></div>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab active" id="tab-lista" onclick="switchTab('lista')">◈ Lista de Produtos</button>
+      <button class="tab" id="tab-form" onclick="switchTab('form')" style="display:none">◉ <span
+          id="tab-form-label">Cadastrar</span></button>
+    </div>
+
+    <!-- LISTA -->
+    <div id="view-lista" class="fade-in">
+      <div class="card filters">
+        <div class="filters-title">Filtros</div>
+        <div class="filters-grid">
+          <input type="text" id="f-busca" placeholder="🔍 Buscar por nome ou categoria..." oninput="renderTable()">
+          <select id="f-cat" onchange="renderTable()">
+            <option value="">Categoria</option>
+            <option>Eletrônicos</option>
+            <option>Cabos</option>
+            <option>Óleo</option>
+            <option>Peças</option>
+            <option>Cama de moto</option>
+            <option>Parafuso</option>
+            <option>Outros</option>
+          </select>
+          <select id="f-status" onchange="renderTable()">
+            <option value="">Status</option>
+            <option>Ativo</option>
+            <option>Inativo</option>
+          </select>
+          <input type="number" id="f-pmin" placeholder="Preço mín." oninput="renderTable()">
+          <input type="number" id="f-pmax" placeholder="Preço máx." oninput="renderTable()">
+        </div>
+        <div class="active-chips" id="active-chips" style="display:none"></div>
+      </div>
+
+      <div class="card">
+        <div class="table-header">
+          <span class="table-count" id="table-count">0 produtos</span>
+        </div>
+        <div id="table-wrap"></div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div id="view-form" style="display:none">
+      <div class="card form-card fade-in">
+        <div class="form-heading">
+          <div class="form-heading-bar"></div>
+          <span class="form-heading-text" id="form-title">NOVO PRODUTO</span>
+        </div>
+        <div class="form-grid">
+          <div>
+            <label class="field-label">Nome do Produto</label>
+            <input type="text" id="f-nome" placeholder="Ex: Notebook Pro X">
+            <span class="field-error" id="err-nome">Nome obrigatório</span>
+          </div>
+          <div class="form-row">
+            <div>
+              <label class="field-label">Categoria</label>
+              <select id="f-categoria">
+                <option value="">Selecionar</option>
+                <option>Eletrônicos</option>
+                <option>Cabos</option>
+                <option>Óleo</option>
+                <option>Peças</option>
+                <option>Cama de moto</option>
+                <option>Parafuso</option>
+                <option>Outros</option>
+              </select>
+              <span class="field-error" id="err-categoria">Categoria obrigatória</span>
+            </div>
+            <div>
+              <label class="field-label">Status</label>
+              <select id="f-status-form">
+                <option>Ativo</option>
+                <option>Inativo</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div>
+              <label class="field-label">Preço (R$)</label>
+              <input type="number" id="f-preco" min="0" step="0.01" placeholder="0,00">
+              <span class="field-error" id="err-preco">Preço inválido</span>
+            </div>
+            <div>
+              <label class="field-label">Estoque (un.)</label>
+              <input type="number" id="f-estoque" min="0" placeholder="0">
+              <span class="field-error" id="err-estoque">Estoque inválido</span>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-ghost" onclick="cancelForm()">Cancelar</button>
+            <button class="btn btn-primary" onclick="submitForm()">✓ <span id="btn-submit-label">Cadastrar
+                Produto</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MODAL DELETE -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <div class="modal-icon">⚠️</div>
+      <div class="modal-title">Remover produto?</div>
+      <div class="modal-desc">Esta ação não pode ser desfeita.</div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+        <button class="btn btn-primary" onclick="confirmDelete()">Remover</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- TOAST -->
-<div class="toast" id="toast">
-  <span id="toast-icon">✓</span>
-  <span id="toast-msg"></span>
-</div>
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <span id="toast-icon">✓</span>
+    <span id="toast-msg"></span>
+  </div>
 
 </body>
+
 </html>
