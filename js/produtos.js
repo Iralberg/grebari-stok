@@ -1,6 +1,11 @@
-
 /* ── DATA ── */
 let produtos = JSON.parse(localStorage.getItem("produt")) || []
+
+// 🔧 FIX: Garante que o contador de ID está sincronizado com os dados existentes
+if (!localStorage.getItem("produt_nextId")) {
+  const maxId = produtos.length > 0 ? Math.max(...produtos.map(p => p.id)) : 0;
+  localStorage.setItem("produt_nextId", maxId + 1);
+}
 
 let editId = null;
 let deleteId = null;
@@ -41,12 +46,13 @@ function abrirTema() {
 }
 
 
-//  --- SAVAR DADOS---
+//  --- SALVAR DADOS---
 
+// 🔧 FIX: Contador persistente — nunca repete IDs, mesmo após deletar produtos
 function gerarId() {
-  if (produtos.length === 0) return 1;
-
-  return Math.max(...produtos.map(p => p.id)) + 1;
+  let nextId = parseInt(localStorage.getItem("produt_nextId") || "1");
+  localStorage.setItem("produt_nextId", nextId + 1);
+  return nextId;
 }
 
 function saveProdutos() {
@@ -132,8 +138,7 @@ function submitForm() {
     produtos[i] = { ...produtos[i], ...p };
     showToast('Produto atualizado!', 'success');
   } else {
-  
-    produtos.push({id:gerarId(), ...p});
+    produtos.push({ id: gerarId(), ...p });
     showToast('Produto cadastrado!', 'success');
   }
   saveProdutos()
@@ -219,8 +224,6 @@ function renderChips() {
     chips.map((c, i) => `<span class="chip">${c.label}<button class="chip-remove" onclick="chipClear(${i})">×</button></span>`).join('') +
     `<button class="btn-clear-all" onclick="clearAllFilters()">Limpar tudo</button>`;
 
-  // store closures
- 
   el._chips = chips;
 }
 
@@ -315,4 +318,3 @@ function escHtml(str) {
 /* ── INIT ── */
 renderStats();
 renderTable();
-
