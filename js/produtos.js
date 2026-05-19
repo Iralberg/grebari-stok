@@ -42,6 +42,10 @@ function abrirTema() {
 
 
 //  --- SAVAR DADOS---
+function gerarId() {
+  return crypto.randomUUID();
+}
+
 function saveProdutos() {
   localStorage.setItem("produt", JSON.stringify(produtos))
   localStorage.setItem("id", nextId)
@@ -125,7 +129,7 @@ function submitForm() {
     produtos[i] = { ...produtos[i], ...p };
     showToast('Produto atualizado!', 'success');
   } else {
-    produtos.push({ id: nextId++, ...p });
+    produtos.push({ gerarId(), ...p });
     showToast('Produto cadastrado!', 'success');
   }
   saveProdutos()
