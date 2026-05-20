@@ -51,10 +51,14 @@ function abrirTema() {
 // 🔧 FIX: Contador persistente — nunca repete IDs, mesmo após deletar produtos
 function gerarId() {
   let nextId = parseInt(localStorage.getItem("produt_nextId") || "1");
+  if(produtos.length===0){
+nextId=0
+  }
   localStorage.setItem("produt_nextId", nextId + 1);
   return nextId;
 }
-
+ 
+ 
 function saveProdutos() {
   localStorage.setItem("produt", JSON.stringify(produtos))
 }
