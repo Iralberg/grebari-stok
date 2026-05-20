@@ -57,7 +57,7 @@ nextId=0
   localStorage.setItem("produt_nextId", nextId + 1);
   return nextId;
 }
- 
+ gerarId()
  
 function saveProdutos() {
   localStorage.setItem("produt", JSON.stringify(produtos))
