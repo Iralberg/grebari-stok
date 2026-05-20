@@ -171,6 +171,7 @@ function confirmDelete() {
   renderStats();
   renderTable();
   saveProdutos();
+  deletarId();
   showToast('Produto removido.', 'error');
 }
 
