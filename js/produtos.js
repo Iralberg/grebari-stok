@@ -59,7 +59,7 @@ function deletarId(){
   if(produtos.length===0){
  localStorage.remove('produt_nexId')
   }
-  gerarId()
+
 }
 deletarId()
  
