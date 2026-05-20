@@ -2,19 +2,42 @@
 <html lang="pt-BR">
 
 <head>
+ <head>
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>GREBARI STOCKR — Gestão de Produtos</title>
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+  <!-- SEO -->
+  <meta name="description" content="Sistema de gestão de produtos GREBARI STOCKR">
+
+  <!-- Tema do navegador -->
+  <meta name="theme-color" content="#fff">
+
+  <!-- Favicon -->
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+
+  <!-- PWA -->
+  <link rel="manifest" href="./manifest.webmanifest">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
- 
+    rel="stylesheet"
+  >
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- JS -->
   <script src="./js/app.js" defer></script>
   <script src="./js/produtos.js" defer></script>
-   <link rel="manifest" href="./manifest.webmanifest">
-  <meta name="theme-color" content="#090b10">
+
+</head>
 </head>
 
 <body>
@@ -66,7 +89,7 @@
         <div class="filters-grid">
           <input type="text" id="f-busca" placeholder="🔍 Buscar por nome ou categoria..." oninput="renderTable()">
           <select id="f-cat" onchange="renderTable()">
-            <option>Categoria</option>
+            <option value="">Categoria</option>
             <option>Kit</option>
             <option>Eletrônicos</option>
             <option>Cabos</option>
