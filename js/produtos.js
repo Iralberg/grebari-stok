@@ -57,7 +57,7 @@ function gerarId() {
 }
 function deletarId(){
   if(produtos.length===0){
- localStorage.remove('produt_nexId')
+ localStorage.setItem("produt_nextId" , "1")
   }
 
 }
